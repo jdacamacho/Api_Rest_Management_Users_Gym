@@ -10,7 +10,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserDTO {
-    private long idUser;
     private String name;
     private float height;
     private float weight;

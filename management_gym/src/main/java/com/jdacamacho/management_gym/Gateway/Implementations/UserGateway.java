@@ -7,6 +7,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import com.jdacamacho.management_gym.Gateway.Interfaces.IUserGateway;
+import com.jdacamacho.management_gym.Models.AddressEntity;
 import com.jdacamacho.management_gym.Models.UserEntity;
 import com.jdacamacho.management_gym.Repositories.UserRepository;
 import com.jdacamacho.management_gym.Services.DTO.UserDTO;
@@ -31,6 +32,8 @@ public class UserGateway implements IUserGateway{
     @Override
     public UserDTO save(UserDTO user) {
         UserEntity userToSave = this.mapper.map(user, UserEntity.class);
+        AddressEntity objAddress = userToSave.getObjAddress();
+        objAddress.setObjUser(userToSave);
         UserEntity userSaved = this.repository.save(userToSave);
         UserDTO response = this.mapper.map(userSaved, UserDTO.class);
         return response;
