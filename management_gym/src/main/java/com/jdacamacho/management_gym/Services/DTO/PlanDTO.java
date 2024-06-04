@@ -15,4 +15,9 @@ public class PlanDTO {
     public PlanDTO(){
         this.benefits = new ArrayList<>();
     }
+
+    public void update(PlanDTO plan){
+        this.name = plan.getName();
+        this.benefits = plan.getBenefits();
+    }
 }

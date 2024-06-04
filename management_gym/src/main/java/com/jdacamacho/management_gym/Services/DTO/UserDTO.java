@@ -20,4 +20,12 @@ public class UserDTO {
     public UserDTO(){
         this.plans = new ArrayList<>();
     }
+
+    public void update(UserDTO user){
+        this.name = user.getName();
+        this.height = user.getHeight();
+        this.weight = user.weight;
+        this.objAddress = user.getObjAddress();
+        this.plans = user.getPlans();
+    }
 }

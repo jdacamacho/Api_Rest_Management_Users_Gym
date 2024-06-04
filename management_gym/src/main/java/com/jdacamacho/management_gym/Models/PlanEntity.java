@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -18,6 +19,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PlanEntity {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPlan;
     private String name;
