@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class BusinessRuleException extends RuntimeException{
     private final String messageKey;
-    private String code;
+    private final String code;
 
     public BusinessRuleException(ErrorCode code){
         super(code.getCode());
@@ -17,7 +17,7 @@ public class BusinessRuleException extends RuntimeException{
 
     public BusinessRuleException(final String message){
         super(message);
-        this.messageKey = ErrorCode.BUSINESS_RULE_VIOLATION.getCode();
+        this.messageKey = ErrorCode.BUSINESS_RULE_VIOLATION.getMessageKey();
         this.code = ErrorCode.BUSINESS_RULE_VIOLATION.getCode();
     }
 }

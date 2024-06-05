@@ -2,7 +2,9 @@ package com.jdacamacho.management_gym.Services.DTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +32,22 @@ public class UserDTO {
         this.getObjAddress().setCity(user.getObjAddress().getCity());
         this.getObjAddress().setCountry(user.getObjAddress().getCountry());
         this.setPlans(user.getPlans());
-
     }
+
+    public boolean userPlansHaveDuplicated(){
+        Set<PlanDTO> validPlansSet = new HashSet<>(this.getPlans());
+        return validPlansSet.size() < this.getPlans().size();
+    }
+
+    public boolean userPlansAreValid(List<PlanDTO> validPlans){
+        Set<PlanDTO> validPlansSet = new HashSet<>(validPlans);
+
+        for(PlanDTO objPlan: this.getPlans()){
+            if(!validPlansSet.contains(objPlan)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

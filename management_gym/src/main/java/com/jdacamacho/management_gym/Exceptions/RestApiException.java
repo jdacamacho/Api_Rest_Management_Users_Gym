@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.jdacamacho.management_gym.Exceptions.ExceptionStructure.Error;
 import com.jdacamacho.management_gym.Exceptions.ExceptionStructure.ErrorCode;
 import com.jdacamacho.management_gym.Exceptions.ExceptionStructure.ErrorUtils;
+import com.jdacamacho.management_gym.Exceptions.OwnException.BusinessRuleException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.EntityExistsException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.EntityNotFoundException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.NoDataException;
@@ -60,6 +61,18 @@ public class RestApiException {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<Error> handleBusinessRuleException(final HttpServletRequest req,
+                    final BusinessRuleException ex) {
+        final Error error = ErrorUtils
+                        .createError(ErrorCode.BUSINESS_RULE_VIOLATION.getCode(),
+                                        String.format("%s, %s", ErrorCode.BUSINESS_RULE_VIOLATION.getMessageKey(),
+                                        ex.getMessage()),
+                                        HttpStatus.NOT_ACCEPTABLE.value())
+                                        .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+    }
 
     @ExceptionHandler(NoDataException.class)
     public ResponseEntity<Error> handleNoDataException(final HttpServletRequest req,

@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.jdacamacho.management_gym.Gateway.Interfaces.IUserGateway;
 import com.jdacamacho.management_gym.Models.AddressEntity;
+import com.jdacamacho.management_gym.Models.PlanEntity;
 import com.jdacamacho.management_gym.Models.UserEntity;
 import com.jdacamacho.management_gym.Repositories.UserRepository;
+import com.jdacamacho.management_gym.Services.DTO.PlanDTO;
 import com.jdacamacho.management_gym.Services.DTO.UserDTO;
 
 @Service
@@ -49,6 +51,13 @@ public class UserGateway implements IUserGateway{
     @Override
     public boolean existsById(long idUser) {
         return this.repository.existsById(idUser);
+    }
+
+    @Override
+    public List<PlanDTO> findAllPlans() {
+        List<PlanEntity> data = this.repository.findAllPlans();
+        List<PlanDTO> response = this.mapper.map(data, new TypeToken<List<PlanDTO>>(){}.getType());
+        return response;
     }
     
 }
