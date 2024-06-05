@@ -18,7 +18,7 @@ public class PlanDTO {
     }
 
     public void update(PlanDTO plan){
-        this.name = plan.getName();
-        this.benefits = plan.getBenefits();
+        this.setName(plan.getName());
+        this.setBenefits(plan.getBenefits());
     }
 }

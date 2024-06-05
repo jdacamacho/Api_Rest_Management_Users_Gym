@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.jdacamacho.management_gym.Exceptions.OwnException.EntityExistsException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.EntityNotFoundException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.NoDataException;
 import com.jdacamacho.management_gym.Gateway.Interfaces.IPlanGateway;
@@ -29,6 +30,9 @@ public class PlanService implements IPlanService {
 
     @Override
     public PlanDTO savePlan(PlanDTO plan) {
+        if(this.gateway.existsById(plan.getIdPlan())){
+            throw new EntityExistsException("Plan with that id already exists in the System");
+        }
         PlanDTO planSaved = this.gateway.save(plan);
         return planSaved;
     }
@@ -46,6 +50,9 @@ public class PlanService implements IPlanService {
 
     @Override
     public PlanDTO findPlanById(long idplan) {
+        if(!this.gateway.existsById(idplan)){
+            throw new EntityNotFoundException("Plan was not found");
+        }
         return this.gateway.findById(idplan);
     }
     

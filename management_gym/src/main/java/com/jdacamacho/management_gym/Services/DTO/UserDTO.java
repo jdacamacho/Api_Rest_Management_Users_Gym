@@ -23,10 +23,13 @@ public class UserDTO {
     }
 
     public void update(UserDTO user){
-        this.name = user.getName();
-        this.height = user.getHeight();
-        this.weight = user.weight;
-        this.objAddress = user.getObjAddress();
-        this.plans = user.getPlans();
+        this.setName(user.getName());
+        this.setHeight(user.getHeight());
+        this.setWeight(user.getWeight());
+        this.getObjAddress().setStreet(user.getObjAddress().getStreet());
+        this.getObjAddress().setCity(user.getObjAddress().getCity());
+        this.getObjAddress().setCountry(user.getObjAddress().getCountry());
+        this.setPlans(user.getPlans());
+
     }
 }

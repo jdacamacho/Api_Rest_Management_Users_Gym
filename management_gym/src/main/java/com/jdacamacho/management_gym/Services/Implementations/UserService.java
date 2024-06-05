@@ -1,9 +1,11 @@
 package com.jdacamacho.management_gym.Services.Implementations;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.jdacamacho.management_gym.Exceptions.OwnException.EntityExistsException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.EntityNotFoundException;
 import com.jdacamacho.management_gym.Exceptions.OwnException.NoDataException;
 import com.jdacamacho.management_gym.Gateway.Interfaces.IUserGateway;
@@ -29,6 +31,10 @@ public class UserService implements IUserService{
 
     @Override
     public UserDTO saveUser(UserDTO user) {
+        if(this.gateway.existsById(user.getIdUser())){
+            throw new EntityExistsException("user with that id already exists in the system");
+        }
+        user.setCreateAt(new Date());
         UserDTO userSaved = this.gateway.save(user);
         return userSaved;
     }
@@ -46,6 +52,9 @@ public class UserService implements IUserService{
 
     @Override
     public UserDTO findUserById(long idUser) {
+        if(!this.gateway.existsById(idUser)){
+            throw new EntityNotFoundException("User was not found");
+        }
         return this.gateway.findById(idUser);
     }
 

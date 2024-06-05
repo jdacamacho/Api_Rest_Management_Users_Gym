@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BenefitDTO {
-    private long idBenefit;
     private String name;
     private String description;
 
