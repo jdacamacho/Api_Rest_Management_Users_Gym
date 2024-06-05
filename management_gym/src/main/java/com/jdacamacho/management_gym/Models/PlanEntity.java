@@ -3,6 +3,7 @@ package com.jdacamacho.management_gym.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class PlanEntity {
     private long idPlan;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "plan_benefits",
         joinColumns = @JoinColumn(name = "idPlan"),
         inverseJoinColumns =  @JoinColumn(name = "idBenefit"))

@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PlanDTO {
+    private long idPlan;
     private String name;
     private List<BenefitDTO> benefits;
 

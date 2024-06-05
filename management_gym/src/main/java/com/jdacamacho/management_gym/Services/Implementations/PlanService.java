@@ -35,7 +35,7 @@ public class PlanService implements IPlanService {
 
     @Override
     public PlanDTO updatePlan(long idplan, PlanDTO plan) {
-        PlanDTO oldPlan;
+        PlanDTO oldPlan = null;
         if(!this.gateway.existsById(idplan)){
             throw new EntityNotFoundException("Plan was not found");
         }
